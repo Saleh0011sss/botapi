@@ -306,19 +306,19 @@ def m(m):
             poster = pjson['Poster']
             urllib.urlretrieve(poster, 'imdb.jpg')
             bot.send_message(m.chat.id, """
-<b>Title</b> : {}
-<b>Year</b> : {}
-<b>Runtime</b> : {}
-<b>Genre</b> : {}
+<b>Movie name</b> : {}
+<b>Year of action</b> : {}
+<b>Movie time</b> : {}
+<b>Movie sort</b> : {}
 <b>Language</b> : {}
             """.format(title,year,runtime,genre,language), parse_mode='HTML')
             bot.send_sticker(m.chat.id, open('imdb.jpg'))
         except IOError:
             bot.send_message(m.chat.id, """
-<b>Title</b> : {}
-<b>Year</b> : {}
-<b>Runtime</b> : {}
-<b>Genre</b> : {}
+<b>Movie name</b> : {}
+<b>Year of action</b> : {}
+<b>Movie time</b> : {}
+<b>Movie sort</b> : {}
 <b>Language</b> : {}
             """.format(title,year,runtime,genre,language), parse_mode='HTML')
         except KeyError:
