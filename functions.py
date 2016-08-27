@@ -17,7 +17,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 owner = 184018132
-TOKEN = '228878990:AAGLB6x7wF36uxw-CNTHEBbQEV02xVPruU4'
+TOKEN = 'token'
 bot = telebot.TeleBot(TOKEN) # Creating our bot object.
 bot.skip_pending=True
 #######################################
