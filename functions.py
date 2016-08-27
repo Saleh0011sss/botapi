@@ -185,7 +185,6 @@ These are what i can do</b>
 /qr [text] 《make qr codes》
 /id 《Your id & info》
 /logo [Url] 《Website logo》
-/github [username][repo] 《github info》
 /voice [text] 《text to speech》
 /whois [domain name] 《domain informations》
 /map [City] 《Map screen》
@@ -303,41 +302,6 @@ def log(m):
 def voice(m):
         urllib.urlretrieve("http://tts.baidu.com/text2audio?lan=en&ie=UTF-8&text={}&".format(m.text.replace('/voice', '')), "voice.ogg")
         bot.send_voice(m.chat.id, open('voice.ogg'))
-
-@bot.message_handler(regexp='^(/github) (.*)')
-def git(m):
-        text = m.text.split()[1]
-        r = req.get('https://api.github.com/repos/{}'.format(text))
-        json_data = r.json()
-        if 'id' in json_data:
-            name = json_data['name']
-            fullname = json_data['full_name']
-            avatar = json_data['owner']['avatar_url']
-            description = json_data['description']
-            clone_url = json_data['clone_url']
-            svn_url = json_data['svn_url']
-            language = json_data['language']
-            forks_count = json_data['forks']
-            default_branch = json_data['default_branch']
-            watchers = json_data['watchers']
-            stargazers_count = json_data['stargazers_count']
-            bot.send_message(m.chat.id, """
-Name : <b>{}</b> \xC2\xA9
-fullname : <b>{}</b> \xE2\x9A\xA1
-description :
-<i>{}</i>
-Clone Url : <b>{}</b>
-Url : <b>{}</b>
-language : <code>{}</code>
-Forks : <code>{}</code> \xF0\x9F\x92\xAC
-Default Branch : <code>{}</code>
-watchers : <code>{}</code>
-Stars : <code>{}</code> \xE2\xAD\x90
-        """.format(name,fullname,description,clone_url,svn_url,language,forks_count,default_branch,watchers,stargazers_count), parse_mode='HTML')
-            urllib.urlretrieve("{}".format(avatar), "git.jpg")
-            bot.send_sticker(m.chat.id, open('git.jpg'))
-        if 'message' in json_data:
-            bot.send_message(m.chat.id, 'Format Error \n /github [username][repo]\n')
 
 @bot.message_handler(commands=['dog'])
 def d(m):
