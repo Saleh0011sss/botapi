@@ -17,7 +17,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 owner = 184018132
-TOKEN = 'token'
+TOKEN = '228878990:AAGLB6x7wF36uxw-CNTHEBbQEV02xVPruU4'
 bot = telebot.TeleBot(TOKEN) # Creating our bot object.
 bot.skip_pending=True
 #######################################
@@ -185,6 +185,7 @@ These are what i can do</b>
 /qr [text] 《make qr codes》
 /id 《Your id & info》
 /logo [Url] 《Website logo》
+/imdb [movie name] 《movie info in imdb》
 /voice [text] 《text to speech》
 /whois [domain name] 《domain informations》
 /map [City] 《Map screen》
@@ -290,6 +291,38 @@ def wt(m):
             bot.send_message(m.chat.id, 'Error\n/weather tehran')
         except IOError:
             print 'not send sticker weather'
+
+@bot.message_handler(regexp='^(/imdb) (.*)')
+def m(m):
+        try:
+            r = urllib.urlopen('http://www.omdbapi.com/?t={}&'.format(m.text.replace('/imdb','')))
+            data = r.read()
+            pjson = json.loads(data)
+            title = pjson['Title']
+            year = pjson['Year']
+            runtime = pjson['Runtime']
+            genre = pjson['Genre']
+            language = pjson['Language']
+            poster = pjson['Poster']
+            urllib.urlretrieve(poster, 'imdb.jpg')
+            bot.send_message(m.chat.id, """
+<b>Title</b> : {}
+<b>Year</b> : {}
+<b>Runtime</b> : {}
+<b>Genre</b> : {}
+<b>Language</b> : {}
+            """.format(title,year,runtime,genre,language), parse_mode='HTML')
+            bot.send_sticker(m.chat.id, open('imdb.jpg'))
+        except IOError:
+            bot.send_message(m.chat.id, """
+<b>Title</b> : {}
+<b>Year</b> : {}
+<b>Runtime</b> : {}
+<b>Genre</b> : {}
+<b>Language</b> : {}
+            """.format(title,year,runtime,genre,language), parse_mode='HTML')
+        except KeyError:
+            bot.send_message(m.chat.id, 'Error')
 
 @bot.message_handler(regexp='^(/logo) (.*)')
 def log(m):
