@@ -184,12 +184,14 @@ These are what i can do</b>
 /dog [Text] 《dogify》
 /gif [Text] 《make gifs》
 /qr [text] 《make qr codes》
+/short [link] 《link shorter》
 /kickme 《leave group》
 /id 《Your id & info》
 /logo [Url] 《Website logo》
 /imdb [movie name] 《movie info in imdb》
 /voice [text] 《text to speech》
 /whois [domain name] 《domain informations》
+/love [name] [name] 《make a love queto photo》
 /map [City] 《Map screen》
 /spotify [Name Track] 《track info》
 /weather [City] 《shows city weather》
@@ -308,6 +310,22 @@ def wt(m):
 @bot.message_handler(commands=['kickme'])
 def answer(m):
     bot.kick_chat_member(m.chat.id, m.from_user.id)
+
+@bot.message_handler(commands=['short'])
+def send_pic(m):
+      try:
+        text = m.text.replace("/short ","")
+        res = urllib.urlopen("http://yeo.ir/api.php?url={}".format(text)).read()
+        bot.send_message(m.chat.id, "*Your Shorten Link :* {}".format(res), parse_mode="Markdown", disable_web_page_preview=True)
+      except:
+        bot.send_message(m.chat.id, '*Error!*', parse_mode="Markdown")
+
+@bot.message_handler(regexp='^(/love) (.*) (.*)')
+def love(m):
+        text = m.text.split()[1]
+        tezt = m.text.split()[2]
+        urllib.urlretrieve("http://www.iloveheartstudio.com/-/p.php?t={}%20%EE%BB%AE%20{}&bc=000000&tc=FFFFFF&hc=ff0000&f=c&uc=true&ts=true&ff=PNG&w=500&ps=sq".format(text,tezt), "love.png")
+        bot.send_sticker(m.chat.id, open('love.png'))
 
 @bot.message_handler(regexp='^(/imdb) (.*)')
 def m(m):
