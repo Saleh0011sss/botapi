@@ -182,7 +182,9 @@ These are what i can do</b>
 /format [Text]  《*bold* _italic_ `code`》
 /time 《local time》 
 /dog [Text] 《dogify》
+/gif [Text] 《make gifs》
 /qr [text] 《make qr codes》
+/kickme 《leave group》
 /id 《Your id & info》
 /logo [Url] 《Website logo》
 /imdb [movie name] 《movie info in imdb》
@@ -230,6 +232,17 @@ def id(m):      # info menu
 #info text
     bot.send_chat_action(cid, "typing")
     bot.reply_to(m, "*ID from* : ```{}``` \n\n *Chat name* : ```{}``` \n\n\n *Your Username* : ```{}``` \n\n *Your First Name* : ```{}```\n\n *Your Last Name* : ```{}```\n\n *Type From* : ```{}``` \n\n *Msg data* : ```{}```\n\n *Your Msg* : ```{}```\n\n* pind msg * : ```{}```\n\n *from* : ```{}```".format(cid,title,usr,f,l,t,d,text,p,fromm), parse_mode="Markdown", reply_markup=markup)
+
+@bot.message_handler(commands=['gif'])
+def aparat(m):
+    text = m.text.replace('/gif ','')
+    url = "http://www.flamingtext.com/net-fu/image_output.cgi?_comBuyRedirect=false&script=blue-fire&text={}&symbol_tagname=popular&fontsize=70&fontname=futura_poster&fontname_tagname=cool&textBorder=15&growSize=0&antialias=on&hinting=on&justify=2&letterSpacing=0&lineSpacing=0&textSlant=0&textVerticalSlant=0&textAngle=0&textOutline=off&textOutline=false&textOutlineSize=2&textColor=%230000CC&angle=0&blueFlame=on&blueFlame=false&framerate=75&frames=5&pframes=5&oframes=4&distance=2&transparent=off&transparent=false&extAnim=gif&animLoop=on&animLoop=false&defaultFrameRate=75&doScale=off&scaleWidth=240&scaleHeight=120&&_=1469943010141".format(text)
+    res = urllib.urlopen(url)
+    parsed_json = json.loads(res.read())
+    gif = parsed_json['src']
+    link = parsed_json['gimpHost']
+    urllib.urlretrieve("{}".format(gif), "gif.gif")
+    bot.send_document(m.chat.id, open('gif.gif'), caption="@Squidward_Bot")
 
 @bot.message_handler(commands=['weather'])
 def wt(m):
@@ -291,6 +304,10 @@ def wt(m):
             bot.send_message(m.chat.id, 'Error\n/weather tehran')
         except IOError:
             print 'not send sticker weather'
+
+@bot.message_handler(commands=['kickme'])
+def answer(m):
+    bot.kick_chat_member(m.chat.id, m.from_user.id)
 
 @bot.message_handler(regexp='^(/imdb) (.*)')
 def m(m):
