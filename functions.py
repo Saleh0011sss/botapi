@@ -17,7 +17,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 owner = 184018132
-TOKEN = 'Your bot token'
+TOKEN = '228878990:AAGLB6x7wF36uxw-CNTHEBbQEV02xVPruU4'
 bot = telebot.TeleBot(TOKEN) # Creating our bot object.
 bot.skip_pending=True
 #######################################
@@ -197,7 +197,7 @@ These are what i can do</b>
 /hello 《say hello》
 /hola 《say hola》</i>
 
-<code>Triggers settings</code> *Groups only
+<b>Triggers settings</b> *Groups only
 
 <i>/add trigger / reaponse 《add a trigger》
 /del trigger 《delete a trigger》
