@@ -246,6 +246,51 @@ def aparat(m):
     urllib.urlretrieve("{}".format(gif), "gif.gif")
     bot.send_document(m.chat.id, open('gif.gif'), caption="@Squidward_Bot")
 
+
+@bot.message_handler(regexp='^(/download) (.*)')
+def all(m):
+    text = m.text.split()[1]
+    id = m.from_user.id
+      try:
+         if m.chat.type == 'private':
+             if re.match('(http|https)://.*.(png)$',text):
+                 msg = bot.send_message(m.chat.id, '*Downloading.....*',parse_mode='Markdown')
+                 dw(text,'file.png')
+                 bot.send_photo(m.chat.id, open('file.png'),caption='@Squidward_bot')
+                 os.remove('file.png')
+             if re.match('(http|https)://.*.(apk)$',text):
+                 msg = bot.send_message(m.chat.id, '*Downloading .....*',parse_mode='Markdown')
+                 dw(text,'app.apk')
+                 bot.send_document(m.chat.id, open('app.apk'),caption='@Squidward_bot')
+                 os.remove('app.apk')
+             if re.match('(http|https)://.*.(html|htm)$',text):
+                 msg = bot.send_message(m.chat.id, '* Downloading .....*',parse_mode='Markdown')
+                 dw(text,'file.html')
+                 bot.send_document(m.chat.id, open('file.html'),caption='@Squidward_bot')
+                 os.remove('file.html')
+             if re.match('(http|https)://.*.(jpg)$',text):
+                 msg = bot.send_message(m.chat.id, '* Downloading .....*',parse_mode='Markdown')
+                 dw(text,'s.jpg')
+                 bot.send_photo(m.chat.id, open('s.jpg') ,caption='@Squidward_bot')
+                 os.remove('s.jpg')
+             if re.match('(http|https)://.*.(gif)$',text):
+                 msg = bot.send_message(m.chat.id, '* Downloading .....*',parse_mode='Markdown')
+                 dw(text,'s.gif')
+                 bot.send_photo(m.chat.id, open('s.gif'),caption='@Squidward_bot')
+                 os.remove('s.gif')
+             if re.match('(http|https)://.*.(zip|rar)$',text):
+                 msg = bot.send_message(m.chat.id, '* Downloading .....*',parse_mode='Markdown')
+                 dw(text,'file.zip')
+                 bot.send_document(m.chat.id, open('file.zip'),caption='@Squidward_bot')
+                 os.remove('file.zip')
+             if re.match('(http|https)://.*.(webp)$',text):
+                 msg = bot.send_message(m.chat.id, '* Downloading .....*',parse_mode='Markdown')
+                 dw(text,'file.webp')
+                 bot.send_sticker(m.chat.id, open('file.webp'))
+                 os.remove('file.webp')
+      except IndexError:
+                 bot.send_message(m.chat.id, '*Error!\nURL Or Format Is Invalid!*',parse_mode='Markdown')
+
 @bot.message_handler(commands=['weather'])
 def wt(m):
         try:
