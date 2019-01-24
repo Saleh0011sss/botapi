@@ -61,9 +61,9 @@ Trigger [{}]
 Response [{}]
 '''
 #END TRIGGERS SECTION
-#######################################
+######################################
 
-#######################################
+######################################
 #Triggers Management Section
 #Adds another trigger-response. ex: "/add Hi / Hi!! :DD"
 @bot.message_handler(commands=['add'])
@@ -159,12 +159,12 @@ def command_ayuda(m):
 @bot.message_handler(commands=['creator', 'ping']) 
 def command_creator(m): 
     cid = m.chat.id 
-    bot.send_message( cid, '🔵Squidward V.1 by @Electrovirus')
+    bot.send_message( cid, '🔵Squidward V.1 by Electrovirus')
 
 @bot.message_handler(commands=['start']) 
 def command_start(m): 
     cid = m.chat.id 
-    bot.send_message( cid, '🐙Hello \n🐙Wellcome to squidwardBot V.1 \n🐙A fun bot based on python \n🐙Developed by @Electrovirus \n\n🐙Use /help to see bot commands')
+    bot.send_message( cid, '🐙Hello \n🐙Wellcome to squidwardBot V.1 \n🐙A fun bot based on python \n🐙Developed by Electrovirus \n\n🐙Use /help to see bot commands')
 
 @bot.message_handler(commands=['help'])
 def welcome(m):
@@ -521,12 +521,12 @@ def whois(m):
 @bot.message_handler(commands=['hola']) 
 def command_hola(m): 
     cid = m.chat.id 
-    bot.send_message( cid, 'Hola, Dadach 😀') 
+    bot.send_message( cid, 'Hola, Dadach 😀😀') 
 
 @bot.message_handler(commands=['hello']) 
 def command_hello(m): 
     cid = m.chat.id 
-    bot.send_message( cid, 'Hello and welcome Dadach😀') 
+    bot.send_message( cid, 'Hello and welcome Dadach😀😀') 
 
 @bot.message_handler(commands=['attack']) 
 def command_attack(m): 
